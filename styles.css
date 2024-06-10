@@ -28,3 +28,12 @@ input {
     padding: 2em 1em;
     max-width: 50vw;
 }
+
+.hidden {
+    display: none;
+}
+
+#output {
+    margin: 1em;
+    padding: 1em;
+}
