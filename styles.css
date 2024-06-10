@@ -1,0 +1,30 @@
+body {
+    background-color: #1b1b32;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    padding: 0.5em;
+    border-radius: 10px;
+    margin: 1em;
+    background-color: #feac32;
+    border: hidden;
+}
+
+input {
+    padding: 0.5em;
+    border-radius: 10px;
+    border: hidden;
+    margin: 1em;
+}
+
+.input-container {
+    border: 1px solid white;
+    padding: 2em 1em;
+    max-width: 50vw;
+}
