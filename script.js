@@ -2,6 +2,8 @@
 const input = document.getElementById('number');
 const convertBtn = document.getElementById('convert-btn');
 const output = document.getElementById('output');
+let numeralsArray = [];
+
 
 // FUNCTIONS //
 
@@ -11,37 +13,60 @@ const checkInput = () => {
         output.innerText = 'Please enter a number';
     } else {
         arabicToRoman(numberInput)
-        output.innerText = numberInput;
+        // output.innerText = numberInput;
         }
         output.classList.toggle("hidden");
         };
         
 const arabicToRoman = (input) => {
-    const arabicNumber = input;
     let remainder = null;
-    console.log(`Arabic number is: ${arabicNumber}`);
-    if (arabicNumber % 10 === 0) {
-        let quotient = arabicNumber / 10; // number of X's to display
-        console.log("Quotient: ", quotient)
-        if (remainder % 5 === 0) {
-            remainder = remainder / 5;
-        console.log("Remainder: ", remainder)
-        return remainder;
-        }
-        return quotient;
-    } else {
-        let remainder = arabicNumber % 10;
-        if (remainder % 5 === 0) {
-            remainder = remainder / 5;
-        }
-        console.log("Remainder: ", remainder)
-        return remainder;
+    console.log(`Arabic number is: ${input}`);
+
+    for (let i = input; i > 0; i--){
+        numeralsArray.push("I")
     };
+    console.log(numeralsArray);
+    output.innerText = numeralsArray.join('')
 
+    // numeralsArray.forEach((numeral) => {});
 
-    // recursive case: n % 5 === 0
+    // recursive case: n % 5 === 0 i.e. remainder = 0
     
-    // base case: n % 5 !== 0
+    // base case: n % 5 !== 0 i.e. remainder != 0
+    if (input % 5 !== 0) { // input = 17
+        let quotient = Math.floor(input / 5) // num of V's // 3 V's
+        remainder = input % 5 // num of I's // 2 I's
+        // logic to produce n V's ... V * quotient
+        // logic to produce n I's ... I * remainder
+
+        // is Math.floor(remainder / 5) === 0 ?
+            // Y: return remainder
+    } else { // input % 5 === 0
+        // 
+    }
+
+
+
+// FIRST PASS:
+    // if (arabicNumber % 10 === 0) {
+    //     let quotient = arabicNumber / 10; // number of X's to display
+    //     console.log("Quotient: ", quotient)
+    //     if (remainder % 5 === 0) {
+    //         remainder = remainder / 5;
+    //     console.log("Remainder: ", remainder)
+    //     return remainder;
+    //     }
+    //     return quotient;
+    // } else {
+    //     let remainder = arabicNumber % 10;
+    //     if (remainder % 5 === 0) {
+    //         remainder = remainder / 5;
+    //     }
+    //     console.log("Remainder: ", remainder)
+    //     return remainder;
+    // };
+
+
 
 
 
