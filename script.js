@@ -25,9 +25,11 @@ const divisors = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
 
 const checkInput = () => {
     const n = input.value;
-    if (!n || n <= 0) {
+    if (!n) {
+        output.innerText = `Please enter a number`;
+        } else if (n <= 0 || n > 3999){
         output.innerText = `Please enter a number ${
-            !n ? '' : 'greater than or equal to 1'
+            n <= 0 ? 'greater than or equal to 1' : 'less than or equal to 3999'
         } `;
     } else {
         arabicToRoman(n);
@@ -38,12 +40,13 @@ const checkInput = () => {
 const arabicToRoman = (input) => {
     let quotient = 0;
     let remainder = 0;
-    let divisor = 5; // needed?
+    let n = 0;
+
     //////////////////
 
     if (input % 5 === 0) { // input is a multiple of 5
 
-        // next need to find num of V's to push i.e. quotient
+        // next need to find num of V's to push i.e. quotient √
         quotient = input / 5; 
         for (let i = quotient; i > 0; i--){
             numeralsArray.push('V');
@@ -51,27 +54,20 @@ const arabicToRoman = (input) => {
 
     } else { // input is NOT a multiple of 5
         remainder = input % 5; // 
-        numeralsArray.push("I") // * remainder
+        for (let i = remainder; i > 0; i--){
+            numeralsArray.push("I")
+            input = remainder
+        }
     }
 
 
 
 
 
-    // if n % 5 === 0 THEN check if n / 5 === 0
 
     // base case: n % 5 === 0
     // recursive case: n % 5 !== 0
 
-    // logic for adding "I"
-    // is n / 5 > 5 ? NO:
-    // numeralsArray.push("I")
-
-    // logic for adding a "V"
-    // is n / 5 >= 1 ? YES:
-    // numeralsArray.push("V")
-    // n = n % 5
-    // .......
 
     //////////////////
 
@@ -124,9 +120,7 @@ const arabicToRoman = (input) => {
 
     ////
 
-    // recursive case: n % 5 === 0 i.e. remainder = 0
 
-    // base case: n % 5 !== 0 i.e. remainder != 0
     // if (input % 5 !== 0) { // input = 17
     //     let quotient = Math.floor(input / 5) // num of V's // 3 V's
     //     remainder = input % 5 // num of I's // 2 I's
