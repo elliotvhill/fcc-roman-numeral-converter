@@ -10,8 +10,8 @@ let quotientsArray = [];
 const checkInput = () => {
     const numberInput = input.value;
     if (!numberInput || numberInput <= 0) {
-        output.innerText = `Please enter ${
-            !numberInput ? 'a number' : 'a number greater than or equal to 1'
+        output.innerText = `Please enter a number ${
+            !numberInput ? '' : 'greater than or equal to 1'
         } `;
     } else {
         arabicToRoman(numberInput);
