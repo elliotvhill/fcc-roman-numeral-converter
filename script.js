@@ -18,8 +18,7 @@ const checkInput = () => {
         // output.innerText = numberInput;
     }
     output.classList.remove('hidden');
-    numeralsArray = [];
-    input.value = '';
+    // input.value = '';
 };
 
 const arabicToRoman = (input) => {
@@ -33,17 +32,22 @@ const arabicToRoman = (input) => {
     while (input > 0) {
         let quotient = Math.floor(input / 5); // number of V's needed
         while (quotient != 0) {
-            quotientsArray.push('V');
+            numeralsArray.push('I');
+            while (numeralsArray.length >= 5 && numeralsArray.length > 0) {
+                console.log("Shifted array:", numeralsArray.shift())
+                quotientsArray.push('V');
+                }
             quotient--;
         }
         // const remainder = input % 5;
-        numeralsArray.push('I');
         // input = quotient;
         input--;
     }
     console.log('Numerals:', numeralsArray);
     console.log('Quotients:', quotientsArray);
     output.innerText = quotientsArray.join('') + numeralsArray.join('');
+    numeralsArray = [];
+    quotientsArray = [];
 
     // if (numeralsArray.length % 5 === 0) {
     //     let numOfVs = numeralsArray.length / 5;
