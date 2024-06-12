@@ -5,37 +5,101 @@ const output = document.getElementById('output');
 let numeralsArray = [];
 let quotientsArray = [];
 let refObject = {
-    1: "I",
-    4: "IV",
-    5: "V",
-    9: "IX",
-    10: "10",
-    40: "XL",
-    50: "L",
-    90: "XC",
-    100: "C",
-    400: "CD",
-    500: "D",
-    900: "CM",
-    1000: "M",
+    1: 'I',
+    4: 'IV',
+    5: 'V',
+    9: 'IX',
+    10: 'X',
+    40: 'XL',
+    50: 'L',
+    90: 'XC',
+    100: 'C',
+    400: 'CD',
+    500: 'D',
+    900: 'CM',
+    1000: 'M',
 };
+const divisors = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
 
 // FUNCTIONS //
 
 const checkInput = () => {
-    const numberInput = input.value;
-    if (!numberInput || numberInput <= 0) {
+    const n = input.value;
+    if (!n || n <= 0) {
         output.innerText = `Please enter a number ${
-            !numberInput ? '' : 'greater than or equal to 1'
+            !n ? '' : 'greater than or equal to 1'
         } `;
     } else {
-        arabicToRoman(numberInput);
+        arabicToRoman(n);
     }
     output.classList.remove('hidden');
 };
 
 const arabicToRoman = (input) => {
-    
+    let quotient = 0;
+    let remainder = 0;
+    let divisor = 5; // needed?
+    //////////////////
+
+    if (input % 5 === 0) { // input is a multiple of 5
+
+        // next need to find num of V's to push i.e. quotient
+        quotient = input / 5; 
+        for (let i = quotient; i > 0; i--){
+            numeralsArray.push('V');
+        }
+
+    } else { // input is NOT a multiple of 5
+        remainder = input % 5; // 
+        numeralsArray.push("I") // * remainder
+    }
+
+
+
+
+
+    // if n % 5 === 0 THEN check if n / 5 === 0
+
+    // base case: n % 5 === 0
+    // recursive case: n % 5 !== 0
+
+    // logic for adding "I"
+    // is n / 5 > 5 ? NO:
+    // numeralsArray.push("I")
+
+    // logic for adding a "V"
+    // is n / 5 >= 1 ? YES:
+    // numeralsArray.push("V")
+    // n = n % 5
+    // .......
+
+    //////////////////
+
+    ///// THIRD PASS W/ REF OBJ:
+    // for (let i = 0; i < divisors.length; i++){
+    //     while (n / divisors[i] > 1) {
+    //         numeralsArray.push("I");
+    //     }
+    //     numeralsArray.push("V");
+    //     return numeralsArray;
+    // }
+
+    // while (n / divisors[i] < 1) {
+    //     // continue running w/ divisors desc
+    // }
+    // once n / divisors[i] > 1
+    // push corresponding roman numeral to array &
+    // loop again with the remainder (%)
+
+    // is there a '5' w/in input? -> insert 'V'
+    // remaining values < 5? -> insert n * 'I'
+    // is there a '10' w/in input? -> insert 'X'
+    // 5 < remaining values < 10? -> insert n * 'V'
+
+    // as long as n / divisor < 1 --> try next smallest divisor
+    //
+    // once n / divisor > 1 --> round down and proceed
+    // checking remainder of n(i.e. %)
 
     ///// SECOND PASS W/O REF OBJ:
     // while (input > 0) {
@@ -52,11 +116,11 @@ const arabicToRoman = (input) => {
     //     // input = quotient;
     //     input--;
     // }
-    // console.log('Numerals:', numeralsArray);
-    // console.log('Quotients:', quotientsArray);
-    // output.innerText = quotientsArray.join('') + numeralsArray.join('');
-    // numeralsArray = [];
-    // quotientsArray = [];
+    console.log('Numerals:', numeralsArray);
+    console.log('Quotients:', quotientsArray);
+    output.innerText = quotientsArray.join('') + numeralsArray.join('');
+    numeralsArray = [];
+    quotientsArray = [];
 
     ////
 
@@ -93,11 +157,6 @@ const arabicToRoman = (input) => {
     //     console.log("Remainder: ", remainder)
     //     return remainder;
     // };
-
-    // is n divisible by 5 ? --------- RECURSIVE CASE
-    //// is (n / 5) divisible by 5 ?
-    //// etc.....
-    // when n % 5 !== 0, calculate remainder --------- BASE CASE
 };
 
 // EVENT LISTENERS //
