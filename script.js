@@ -4,6 +4,21 @@ const convertBtn = document.getElementById('convert-btn');
 const output = document.getElementById('output');
 let numeralsArray = [];
 let quotientsArray = [];
+let refObject = {
+    1: "I",
+    4: "IV",
+    5: "V",
+    9: "IX",
+    10: "10",
+    40: "XL",
+    50: "L",
+    90: "XC",
+    100: "C",
+    400: "CD",
+    500: "D",
+    900: "CM",
+    1000: "M",
+};
 
 // FUNCTIONS //
 
