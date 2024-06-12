@@ -15,7 +15,6 @@ const checkInput = () => {
         } `;
     } else {
         arabicToRoman(numberInput);
-        // output.innerText = numberInput;
     }
     output.classList.remove('hidden');
     // input.value = '';
@@ -33,7 +32,7 @@ const arabicToRoman = (input) => {
         let quotient = Math.floor(input / 5); // number of V's needed
         while (quotient != 0) {
             numeralsArray.push('I');
-            while (numeralsArray.length >= 5 && numeralsArray.length > 0) {
+            while (numeralsArray.length >= 5) {
                 console.log("Shifted array:", numeralsArray.shift())
                 quotientsArray.push('V');
                 }
