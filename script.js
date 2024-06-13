@@ -63,12 +63,49 @@ const arabicToRoman = (input) => {
 
     /* 
 
-    rules for conversion:
+
+    brute force option:
+    convert input to all I's, 
+    then iterate thru array of I's looking to make 
+    larger groupings, concatenate all at the end
+    27 = [I, I, I, I, I, I, I, ...]
+    27 = [IV, I, I, I, I, I, I, I, ...]
+    27 = [IV, IV, IV, IV, IV, IV, I, I, I]
+    27 = [X, X, IV, I, I, I]
+    27 = [X, X, V, I, I] // RESULT
+    
+    ...
+    28 = [IV, IV, IV, IV, IV, IV, IV] / 10?
+    28 - (28 % 10) = 20
+    20 / 10 = 2 -> need 2 X's -> X X
+    28 = [X, X, IV, IV]
+    8 % 5 = 3 -> need 3 I's -> I I I 
+    Math.floor(8 / 5) = 1 === number of V's
+
+
+
+    conditions for conversion:
 
     1. program ENDS when there are NO GREATER THAN 3 consecutive CHARS (any)
     2. FOUR consecutive I's (IIII) triggers CONVERSION to IV
-    3. if IV is followed by another I (IVI i.e. '5') -> drop the leading I and skip the next I, leaving V (5)
+    3. if IV is followed by ANYTHING (IVI i.e. '5') -> CONTINUE -> drop the leading I and skip the next I, leaving V (5)
     3. a. if IVII... loop back to #1 / #2 (check for >3 I's, then IV, etc.)
+
+    
+    // PSEUDO:
+    
+    // is it possible to have >3 consec chars at all?
+    is inputArr.length > 3 ? 
+    
+    // are three consec chars identical?
+    is inputArr[i] === inputArr[i+1] === inputArr[i+2] ? 
+    
+    // 4 consec chars of any kind
+    is inputArr[i] === inputArr[i+1] === inputArr[i+2] === inputArr[i+3] ? 
+
+    // does "VV" appear ANYwhere in inputArr ?
+
+
     
     */
 
