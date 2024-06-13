@@ -38,32 +38,28 @@ const checkInput = () => {
 };
 
 const arabicToRoman = (input) => {
-    let quotient = 0;
-    let remainder = 0;
-    let n = 0;
-
-    //////////////////
-
-    if (input % 5 === 0) { // input is a multiple of 5
-
-        // next need to find num of V's to push i.e. quotient √
-        quotient = input / 5; 
-        for (let i = quotient; i > 0; i--){
-            numeralsArray.push('V');
+    for (let i = input; i > 0; i--){
+        numeralsArray.push("I")
         }
+    
+    console.log("All I's:", numeralsArray)
 
-    } else { // input is NOT a multiple of 5
-        remainder = input % 5; // 
-        for (let i = remainder; i > 0; i--){
-            numeralsArray.push("I")
-            input = remainder
+    if (numeralsArray.length > 3) {
+        for (let n = 0; n < numeralsArray.length; n++){
+            if (numeralsArray[n] === numeralsArray[n + 1] &&
+                numeralsArray[n + 1] === numeralsArray[n + 2] &&
+                numeralsArray[n + 2]  === numeralsArray[n + 3]) {
+                numeralsArray.splice(0, 4,"IV")
+            }
         }
+    console.log("IV's and I's:", numeralsArray)
     }
 
-
+    
+    
     /* 
-
-
+    
+    
     brute force option:
     convert input to all I's, 
     then iterate thru array of I's looking to make 
@@ -81,16 +77,16 @@ const arabicToRoman = (input) => {
     28 = [X, X, IV, IV]
     8 % 5 = 3 -> need 3 I's -> I I I 
     Math.floor(8 / 5) = 1 === number of V's
-
-
-
+    
+    
+    
     conditions for conversion:
-
+    
     1. program ENDS when there are NO GREATER THAN 3 consecutive CHARS (any)
     2. FOUR consecutive I's (IIII) triggers CONVERSION to IV
     3. if IV is followed by ANYTHING (IVI i.e. '5') -> CONTINUE -> drop the leading I and skip the next I, leaving V (5)
     3. a. if IVII... loop back to #1 / #2 (check for >3 I's, then IV, etc.)
-
+    
     
     // PSEUDO:
     
@@ -102,15 +98,36 @@ const arabicToRoman = (input) => {
     
     // 4 consec chars of any kind
     is inputArr[i] === inputArr[i+1] === inputArr[i+2] === inputArr[i+3] ? 
-
+    
     // does "VV" appear ANYwhere in inputArr ?
-
-
+    
+    
     
     */
-
-
-
+   
+   
+    //////////////////
+       /* // FOURTH PASS: 
+       let quotient = 0;
+       let remainder = 0;
+       let n = 0;
+       if (input % 5 === 0) { // input is a multiple of 5
+   
+           // next need to find num of V's to push i.e. quotient √
+           quotient = input / 5; 
+           for (let i = quotient; i > 0; i--){
+               numeralsArray.push('V');
+           }
+   
+       } else { // input is NOT a multiple of 5
+           remainder = input % 5; // 
+           for (let i = remainder; i > 0; i--){
+               numeralsArray.push("I")
+               input = remainder
+           }
+       } */
+   
+   
     // base case: n % 5 === 0
     // recursive case: n % 5 !== 0
 
@@ -158,8 +175,8 @@ const arabicToRoman = (input) => {
     //     // input = quotient;
     //     input--;
     // }
-    console.log('Numerals:', numeralsArray);
-    console.log('Quotients:', quotientsArray);
+    // console.log('Numerals:', numeralsArray);
+    // console.log('Quotients:', quotientsArray);
     output.innerText = quotientsArray.join('') + numeralsArray.join('');
     numeralsArray = [];
     quotientsArray = [];
