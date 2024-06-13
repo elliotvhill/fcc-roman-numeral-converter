@@ -61,7 +61,16 @@ const arabicToRoman = (input) => {
     }
 
 
+    /* 
 
+    rules for conversion:
+
+    1. program ENDS when there are NO GREATER THAN 3 consecutive CHARS (any)
+    2. FOUR consecutive I's (IIII) triggers CONVERSION to IV
+    3. if IV is followed by another I (IVI i.e. '5') -> drop the leading I and skip the next I, leaving V (5)
+    3. a. if IVII... loop back to #1 / #2 (check for >3 I's, then IV, etc.)
+    
+    */
 
 
 
