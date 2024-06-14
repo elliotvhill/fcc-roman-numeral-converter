@@ -4,22 +4,7 @@ const convertBtn = document.getElementById('convert-btn');
 const output = document.getElementById('output');
 let numeralsArray = [];
 let quotientsArray = [];
-// let refObject = {
-//     1: 'I',
-//     4: 'IV',
-//     5: 'V',
-//     9: 'IX',
-//     10: 'X',
-//     40: 'XL',
-//     50: 'L',
-//     90: 'XC',
-//     100: 'C',
-//     400: 'CD',
-//     500: 'D',
-//     900: 'CM',
-//     1000: 'M',
-// };
-// const divisors = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
+
 
 // FUNCTIONS //
 
@@ -35,16 +20,20 @@ const checkInput = () => {
     } else {
         arabicToRoman(n);
     }
+    output.innerText = numeralsArray.join('');
     output.classList.remove('hidden');
+    numeralsArray = [];
+    quotientsArray = [];
 };
 
 const arabicToRoman = (input) => {
+    // convert to all I's
     for (let i = input; i > 0; i--) {
         numeralsArray.push('I');
     }
-
     console.log("All I's:", numeralsArray);
 
+    // convert to IV's and I's
     if (numeralsArray.length > 3) {
         for (let n = 0; n < numeralsArray.length; n++) {
             if (
@@ -53,10 +42,10 @@ const arabicToRoman = (input) => {
                 numeralsArray[n + 2] === numeralsArray[n + 3]
             ) {
                 numeralsArray.splice(n, 4, 'IV');
-                }
-                continue
-                }
-            return console.log("IV's and I's:", numeralsArray);
+            }
+            continue;
+        }
+        return console.log("IV's and I's:", numeralsArray);
     }
 
     /* 
@@ -85,7 +74,7 @@ const arabicToRoman = (input) => {
     conditions for conversion:
     
     1. program ENDS when there are NO GREATER THAN 3 consecutive CHARS (any)
-    2. FOUR consecutive I's (IIII) triggers CONVERSION to IV
+    2. FOUR consecutive I's (IIII) triggers CONVERSION to IV √
     3. if IV is followed by ANYTHING (IVI i.e. '5') -> CONTINUE -> drop the leading I and skip the next I, leaving V (5)
     3. a. if IVII... loop back to #1 / #2 (check for >3 I's, then IV, etc.)
     
@@ -102,6 +91,7 @@ const arabicToRoman = (input) => {
     is inputArr[i] === inputArr[i+1] === inputArr[i+2] === inputArr[i+3] ? 
     
     // does "VV" appear ANYwhere in inputArr ?
+    // inputArr.includes("VV")
     
     
     
@@ -132,15 +122,6 @@ const arabicToRoman = (input) => {
     // recursive case: n % 5 !== 0
 
     //////////////////
-
-    
-    // console.log('Numerals:', numeralsArray);
-    // console.log('Quotients:', quotientsArray);
-    // output.innerText = quotientsArray.join('') + numeralsArray.join('');
-    output.innerText = numeralsArray.join('');
-    numeralsArray = [];
-    quotientsArray = [];
-
 };
 
 // EVENT LISTENERS //
