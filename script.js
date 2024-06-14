@@ -31,7 +31,7 @@ const arabicToRoman = (input) => {
     for (let i = input; i > 0; i--) {
         numeralsArray.push('I');
     }
-    console.log("All I's:", numeralsArray);
+    // console.log("All I's:", numeralsArray);
 
     // convert to IV's and I's
     if (numeralsArray.length > 3) {
@@ -43,7 +43,10 @@ const arabicToRoman = (input) => {
             ) {
                 numeralsArray.splice(n, 4, 'IV');
             }
-            continue;
+            // convert IV+'s to V's
+            if (numeralsArray[n] === "IV" && numeralsArray[n + 1] != null) {
+                numeralsArray.splice(n, 2, "V")
+            }
         }
         return console.log("IV's and I's:", numeralsArray);
     }
