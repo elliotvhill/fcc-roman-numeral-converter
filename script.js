@@ -1,9 +1,8 @@
 // VARIABLES //
-const input = document.getElementById('number');
-const convertBtn = document.getElementById('convert-btn');
-const output = document.getElementById('output');
+const input = document.getElementById("number");
+const convertBtn = document.getElementById("convert-btn");
+const output = document.getElementById("output");
 let numeralsArray = [];
-
 
 // FUNCTIONS //
 
@@ -14,22 +13,22 @@ const checkInput = () => {
         output.innerText = `Please enter a number`;
     } else if (n <= 0 || n > 3999) {
         output.innerText = `Please enter a number ${
-            n <= 0 ? 'greater than or equal to 1' : 'less than or equal to 3999'
+            n <= 0 ? "greater than or equal to 1" : "less than or equal to 3999"
         } `;
     } else {
         arabicToRoman(n);
     }
-    output.innerText = numeralsArray.join('');
-    output.classList.remove('hidden');
+    output.innerText = numeralsArray.join("");
+    output.classList.remove("hidden");
     numeralsArray = [];
-    quotientsArray = [];
 };
 
 const convertToIs = (input) => {
     // convert to all I's
     for (let i = input; i > 0; i--) {
-        numeralsArray.push('I');
+        numeralsArray.push("I");
     }
+    return console.log("I's:", numeralsArray);
 };
 
 const convertToVs = () => {
@@ -40,59 +39,77 @@ const convertToVs = () => {
                 numeralsArray[i + 1] === numeralsArray[i + 2] &&
                 numeralsArray[i + 2] === numeralsArray[i + 3]
             ) {
-                numeralsArray.splice(i, 4, 'IV');
+                numeralsArray.splice(i, 4, "IV");
             }
             // convert IV+'s to V's
             if (
-                numeralsArray[i] === 'IV' &&
+                numeralsArray[i] === "IV" &&
                 numeralsArray[i + 1] != null
             ) {
-                numeralsArray.splice(i, 2, 'V');
+                numeralsArray.splice(i, 2, "V");
             }
         }
-        return console.log('Converted numerals:', numeralsArray);
+        return console.log("V's:", numeralsArray);
     }
 };
 
 const convertNines = () => {
     if (numeralsArray.length > 1) {
-        for (let i = 0; i < numeralsArray.length; i++){
+        for (let i = 0; i < numeralsArray.length; i++) {
             if (
-                numeralsArray[i] === 'V' &&
+                numeralsArray[i] === "V" &&
                 numeralsArray[i + 1] === "IV"
             ) {
-                numeralsArray.splice(i, 2, 'IX');
+                numeralsArray.splice(i, 2, "IX");
             }
         }
+        return console.log("IX's:", numeralsArray);
     }
-}
+};
 
 const convertToXs = () => {
     if (numeralsArray.length > 1) {
         for (let i = 0; i < numeralsArray.length; i++) {
             if (
-                numeralsArray[i] === 'V' &&
-                numeralsArray[i + 1] === 'V'
+                numeralsArray[i] === "V" &&
+                numeralsArray[i + 1] === "V"
             ) {
-                numeralsArray.splice(i, 2, 'X');
+                numeralsArray.splice(i, 2, "X");
             }
         }
-        return console.log("Converted 10's:", numeralsArray);
+        return console.log("X's:", numeralsArray);
+    }
+};
+
+const convertLs = () => {
+    if (numeralsArray.length > 3) {
+        for (let i = 0; i < numeralsArray.length; i++) {
+            if (
+                numeralsArray[i] === "X" &&
+                numeralsArray[i + 1] === "X" &&
+                numeralsArray[i + 2] === "X" &&
+                numeralsArray[i + 3] === "X"
+            ) {
+                numeralsArray.splice(i + 1, 3, "L");
+            }
+        }
+        return console.log("L's:", numeralsArray);
     }
 };
 
 const arabicToRoman = (input) => {
     convertToIs(input);
-    convertToVs();
-    convertToXs();
-    convertNines();
+    convertToVs(); // bug at 14
+    convertNines(); // bug at 24
+    convertToXs(); // bug at 34
+    convertLs(); // bug at 44
 };
 
 // EVENT LISTENERS //
 
-convertBtn.addEventListener('click', checkInput);
-input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+convertBtn.addEventListener("click", checkInput);
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
         checkInput();
     }
 });
