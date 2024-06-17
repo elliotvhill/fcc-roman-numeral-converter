@@ -3,7 +3,6 @@ const input = document.getElementById('number');
 const convertBtn = document.getElementById('convert-btn');
 const output = document.getElementById('output');
 let numeralsArray = [];
-let quotientsArray = [];
 
 
 // FUNCTIONS //
@@ -31,9 +30,9 @@ const convertToIs = (input) => {
     for (let i = input; i > 0; i--) {
         numeralsArray.push('I');
     }
-}
+};
 
-const convertToVs = (input) => {
+const convertToVs = () => {
     if (numeralsArray.length > 3) {
         for (let n = 0; n < numeralsArray.length; n++) {
             if (
@@ -45,37 +44,46 @@ const convertToVs = (input) => {
             }
             // convert IV+'s to V's
             if (
-                numeralsArray[n] === "IV" &&
+                numeralsArray[n] === 'IV' &&
                 numeralsArray[n + 1] != null
             ) {
-                numeralsArray.splice(n, 2, "V")
+                numeralsArray.splice(n, 2, 'V');
             }
         }
-        return console.log("Converted numerals:", numeralsArray);
+        return console.log('Converted numerals:', numeralsArray);
     }
-}
+};
 
-const convertToXs = (input) => {
+const convertToXs = () => {
     if (numeralsArray.length > 1) {
-        for (let i = 0; i < numeralsArray.length; i++){
+        for (let i = 0; i < numeralsArray.length; i++) {
             if (
-                numeralsArray[i] === "V" &&
-                numeralsArray[i+1] === "V"
+                numeralsArray[i] === 'V' &&
+                numeralsArray[i + 1] === 'V'
             ) {
-                numeralsArray.splice(i, 2, "X")
+                numeralsArray.splice(i, 2, 'X');
             }
         }
-        return console.log("Converted 10's:", numeralsArray)
+        return console.log("Converted 10's:", numeralsArray);
     }
-}
+};
 
 const arabicToRoman = (input) => {
-    convertToIs(input)
-    convertToVs(input)
-    convertToXs(input)
-    };
-    
-    /* 
+    convertToIs(input);
+    convertToVs();
+    convertToXs();
+};
+
+// EVENT LISTENERS //
+
+convertBtn.addEventListener('click', checkInput);
+input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkInput();
+    }
+});
+
+/* 
     
     
     brute force option:
@@ -122,16 +130,7 @@ const arabicToRoman = (input) => {
     
     */
 
-    // base case: n % 5 === 0
-    // recursive case: n % 5 !== 0
+// base case: n % 5 === 0
+// recursive case: n % 5 !== 0
 
-    //////////////////
-
-// EVENT LISTENERS //
-
-convertBtn.addEventListener('click', checkInput);
-input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        checkInput();
-    }
-});
+//////////////////
