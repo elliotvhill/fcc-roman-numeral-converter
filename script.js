@@ -34,25 +34,38 @@ const convertToIs = (input) => {
 
 const convertToVs = () => {
     if (numeralsArray.length > 3) {
-        for (let n = 0; n < numeralsArray.length; n++) {
+        for (let i = 0; i < numeralsArray.length; i++) {
             if (
-                numeralsArray[n] === numeralsArray[n + 1] &&
-                numeralsArray[n + 1] === numeralsArray[n + 2] &&
-                numeralsArray[n + 2] === numeralsArray[n + 3]
+                numeralsArray[i] === numeralsArray[i + 1] &&
+                numeralsArray[i + 1] === numeralsArray[i + 2] &&
+                numeralsArray[i + 2] === numeralsArray[i + 3]
             ) {
-                numeralsArray.splice(n, 4, 'IV');
+                numeralsArray.splice(i, 4, 'IV');
             }
             // convert IV+'s to V's
             if (
-                numeralsArray[n] === 'IV' &&
-                numeralsArray[n + 1] != null
+                numeralsArray[i] === 'IV' &&
+                numeralsArray[i + 1] != null
             ) {
-                numeralsArray.splice(n, 2, 'V');
+                numeralsArray.splice(i, 2, 'V');
             }
         }
         return console.log('Converted numerals:', numeralsArray);
     }
 };
+
+const convertNines = () => {
+    if (numeralsArray.length > 1) {
+        for (let i = 0; i < numeralsArray.length; i++){
+            if (
+                numeralsArray[i] === 'V' &&
+                numeralsArray[i + 1] === "IV"
+            ) {
+                numeralsArray.splice(i, 2, 'IX');
+            }
+        }
+    }
+}
 
 const convertToXs = () => {
     if (numeralsArray.length > 1) {
@@ -72,6 +85,7 @@ const arabicToRoman = (input) => {
     convertToIs(input);
     convertToVs();
     convertToXs();
+    convertNines();
 };
 
 // EVENT LISTENERS //
