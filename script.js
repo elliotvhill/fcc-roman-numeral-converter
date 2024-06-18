@@ -99,10 +99,10 @@ const convertLs = () => {
 
 const arabicToRoman = (input) => {
     convertToIs(input);
-    convertToVs(); // bug at 14
-    convertNines(); // bug at 24
+    convertToVs();
     convertToXs(); // bug at 34
-    convertLs(); // bug at 44
+    convertNines(); // creates bug at 14 -> VIX
+    // convertLs(); // bug at 44
 };
 
 // EVENT LISTENERS //
