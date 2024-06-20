@@ -10,15 +10,15 @@ const checkInput = () => {
     numeralsArray = [];
     const n = input.value;
     if (!n) {
-        output.innerText = `Please enter a number`;
+        output.innerText = `Please enter a valid number`;
     } else if (n <= 0 || n > 3999) {
         output.innerText = `Please enter a number ${
             n <= 0 ? "greater than or equal to 1" : "less than or equal to 3999"
         } `;
     } else {
         arabicToRoman(n);
+        output.innerText = numeralsArray.join("");
     }
-    output.innerText = numeralsArray.join("");
     output.classList.remove("hidden");
     numeralsArray = [];
 };
@@ -107,9 +107,9 @@ const convertLs = () => {
 const arabicToRoman = (input) => {
     convertToIs(input);
     convertToVs();
-    convertToXs(); // bug at 34
-    convertNines(); // creates bug at 14 -> VIX
-    // convertLs(); // bug at 44
+    convertToXs();
+    convertNines();
+    convertLs();
 };
 
 // EVENT LISTENERS //
