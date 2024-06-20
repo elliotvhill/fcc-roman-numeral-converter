@@ -92,6 +92,13 @@ const convertLs = () => {
             ) {
                 numeralsArray.splice(i + 1, 3, "L");
             }
+            if (
+                numeralsArray[i] === "X" &&
+                numeralsArray[i + 1] === "L" &&
+                numeralsArray[i + 2] === "X"
+            ) {
+                numeralsArray.splice(i, 3, "L")
+            }
         }
         return console.log("L's:", numeralsArray);
     }
