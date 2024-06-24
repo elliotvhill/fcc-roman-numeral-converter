@@ -104,12 +104,40 @@ const convertLs = () => {
     }
 };
 
+const convertCs = () => {
+    if (numeralsArray.length > 3) {
+        for (let i = 0; i < numeralsArray.length; i++) {
+            if (
+                numeralsArray[i] === "L" &&
+                numeralsArray[i + 1] === "L" &&
+                numeralsArray[i + 2] === "L" &&
+                numeralsArray[i + 3] === "L"
+            ) {
+                numeralsArray.splice(i + 1, 3, "C");
+            }
+            if (
+                numeralsArray[i] === "X" &&
+                numeralsArray[i + 1] === "L" &&
+                numeralsArray[i + 2] === "X"
+            ) {
+                numeralsArray.splice(i, 3, "L")
+            }
+        }
+        return console.log("L's:", numeralsArray);
+    }
+};
+
+
+
 const arabicToRoman = (input) => {
     convertToIs(input);
     convertToVs();
     convertToXs();
     convertNines();
     convertLs();
+    // convertCs();
+    // convertDs();
+    // convertMs();
 };
 
 // EVENT LISTENERS //
