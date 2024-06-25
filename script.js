@@ -98,8 +98,6 @@ const convertLs = () => {
                 numeralsArray[i + 2] === "X"
             ) {
                 numeralsArray.splice(i, 3, "L")
-                // let initialValue = 0;
-                // numeralsArray.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue)
             }
         }
         return console.log("L's:", numeralsArray);
@@ -120,8 +118,7 @@ const convertCs = () => {
                 numeralsArray[i + 1] === "X" &&
                 numeralsArray[i + 2] === "L"
             ) {
-                numeralsArray.splice(0, 3, "XC")
-                return console.log("XC:", numeralsArray)
+                numeralsArray.splice(i, 3, "XC")
             }
         }
         return console.log("C's:", numeralsArray);
