@@ -125,6 +125,28 @@ const convertCs = () => {
     }
 };
 
+const convertDs = () => {
+    if (numeralsArray.length >= 2) {
+        for (let i = 0; i < numeralsArray.length; i++) {
+            if (
+                numeralsArray[i] === "C" &&
+                numeralsArray[i + 1] === "C" &&
+                numeralsArray[i + 2] === "C" &&
+                numeralsArray[i + 3] === "C"
+            ) {
+                numeralsArray.splice(i, 4, "CD");
+            }
+            else if (
+                numeralsArray[0] === "CD" &&
+                numeralsArray[1] === "C"
+            ) {
+                numeralsArray.splice(0, 2, "D")
+            }
+        }
+        return console.log("D's:", numeralsArray);
+    }
+};
+
 
 
 const arabicToRoman = (input) => {
@@ -134,7 +156,7 @@ const arabicToRoman = (input) => {
     convertNines();
     convertLs();
     convertCs();
-    // convertDs();
+    convertDs();
     // convertMs();
 };
 
