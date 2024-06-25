@@ -41,7 +41,6 @@ const convertToVs = () => {
             ) {
                 numeralsArray.splice(i, 4, "IV");
             }
-            // convert IV+'s to V's
             if (
                 numeralsArray[i] === "IV" &&
                 numeralsArray[i + 1] != null
@@ -49,8 +48,8 @@ const convertToVs = () => {
                 numeralsArray.splice(i, 2, "V");
             }
         }
-        return console.log("V's:", numeralsArray);
     }
+    return console.log("V's:", numeralsArray);
 };
 
 const convertNines = () => {
@@ -63,8 +62,8 @@ const convertNines = () => {
                 numeralsArray.splice(i, 2, "IX");
             }
         }
-        return console.log("IX's:", numeralsArray);
     }
+    return console.log("IX's:", numeralsArray);
 };
 
 const convertToXs = () => {
@@ -77,8 +76,8 @@ const convertToXs = () => {
                 numeralsArray.splice(i, 2, "X");
             }
         }
-        return console.log("X's:", numeralsArray);
     }
+    return console.log("X's:", numeralsArray);
 };
 
 const convertLs = () => {
@@ -100,8 +99,8 @@ const convertLs = () => {
                 numeralsArray.splice(i, 3, "L")
             }
         }
-        return console.log("L's:", numeralsArray);
     }
+    return console.log("L's:", numeralsArray);
 };
 
 const convertCs = () => {
@@ -121,21 +120,14 @@ const convertCs = () => {
                 numeralsArray.splice(i, 3, "XC")
             }
         }
-        return console.log("C's:", numeralsArray);
     }
+    return console.log("C's:", numeralsArray);
 };
 
 const convertDs = () => {
     if (numeralsArray.length >= 2) {
         for (let i = 0; i < numeralsArray.length; i++) {
             if (
-                numeralsArray.length >= 2 &&
-                numeralsArray[0] === "CD" &&
-                numeralsArray[1] === "C"
-            ) {
-                numeralsArray.splice(0, 2, "D")
-            }
-            else if (
                 numeralsArray[i] === "C" &&
                 numeralsArray[i + 1] === "C" &&
                 numeralsArray[i + 2] === "C" &&
@@ -143,9 +135,35 @@ const convertDs = () => {
             ) {
                 numeralsArray.splice(i, 4, "CD");
             }
+            if (
+                numeralsArray[i] === "CD" &&
+                numeralsArray[i + 1] === "C"
+            ) {
+                numeralsArray.splice(i, 2, "D")
+            }
         }
-        return console.log("D's:", numeralsArray);
     }
+    return console.log("D's:", numeralsArray);
+};
+
+const convertMs = () => {
+    if (numeralsArray.length >= 2) {
+        for (let i = 0; i < numeralsArray.length; i++) {
+            if (
+                numeralsArray[i] === "D" &&
+                numeralsArray[i + 1] === "CD"
+            ) {
+                numeralsArray.splice(i, 2, "CM");
+            }
+            if (
+                numeralsArray[i] === "D" &&
+                numeralsArray[i + 1] === "D"
+            ) {
+                numeralsArray.splice(i, 2, "M")
+            }
+        }
+    }
+    return console.log("M's:", numeralsArray);
 };
 
 
@@ -158,7 +176,7 @@ const arabicToRoman = (input) => {
     convertLs();
     convertCs();
     convertDs();
-    // convertMs();
+    convertMs();
 };
 
 // EVENT LISTENERS //
