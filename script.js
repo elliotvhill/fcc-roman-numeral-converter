@@ -32,19 +32,63 @@ const checkInput = () => {
 // CD C -> D -- no match
 // D CD -> CM -- no match
 // D D -> M -- match
+// IV *anything else* -> V etc
+// IX *anything else* -> X etc
 
 
-// four in a row (max) -- all match
+// four in a row (max) -- i.e. multiple of FOUR
 // I I I I -> IV
 // X X X X -> XL
 // C C C C -> CD
-if (
-    // four in a row
-    numeralsArray[i] === numeralsArray[i + 1] &&
-    numeralsArray[i + 1] === numeralsArray[i + 2] && 
-    numeralsArray[i + 2] === numeralsArray[i + 3]
-) {
-    // change to either IV XL or CD
+
+// input is 40
+// 40 / 10 -> 4
+// 40 / 9 --> remainder -> continue
+// 40 / 5
+// 40 / 4
+// 40 / 1
+
+const divideByTen = (input) => {
+    return input / 10;
+}
+const divideByNine = (input) => {
+    if (input % 9 != 0) {
+        return;
+    } else {
+        return input / 9;
+    }
+}
+const divideByFive = (input) => {
+    return input / 5;
+}
+const divideByFour = (input) => {
+    return input / 4;
+}
+const divideByOne = (input) => {
+    return input / 1;
+}
+
+const fourInARow = () => {
+    for (let i = 0; i < numeralsArray.length; i++) {
+        if (
+            numeralsArray[i] === numeralsArray[i + 1] &&
+            numeralsArray[i + 1] === numeralsArray[i + 2] &&
+            numeralsArray[i + 2] === numeralsArray[i + 3] &&
+            numeralsArray[i + 3] === numeralsArray[i + 4]
+        ) {
+            // change to either IV XL or CD
+            numeralsArray.splice(i, 4, () => {
+                if (numeralsArray[i] === "I") {
+                    return "IV"
+                } else if (numeralsArray[i] === "X") {
+                    return "XL"
+                } else {
+                    return "CD"
+                }
+            })
+            return console.log(numeralsArray)
+        }
+    }
 }
 
 
@@ -58,13 +102,13 @@ const convertToIs = (input) => {
 const convertToVs = () => {
     if (numeralsArray.length > 3) {
         for (let i = 0; i < numeralsArray.length; i++) {
-            if (
-                numeralsArray[i] === numeralsArray[i + 1] &&
-                numeralsArray[i + 1] === numeralsArray[i + 2] &&
-                numeralsArray[i + 2] === numeralsArray[i + 3]
-            ) {
-                numeralsArray.splice(i, 4, "IV");
-            }
+            // if (
+            //     numeralsArray[i] === numeralsArray[i + 1] &&
+            //     numeralsArray[i + 1] === numeralsArray[i + 2] &&
+            //     numeralsArray[i + 2] === numeralsArray[i + 3]
+            // ) {
+            //     numeralsArray.splice(i, 4, "IV");
+            // }
             if (
                 numeralsArray[i] === "IV" &&
                 numeralsArray[i + 1] != null
@@ -195,6 +239,7 @@ const convertMs = () => {
 const arabicToRoman = (input) => {
     convertToIs(input);
     convertToVs();
+    fourInARow();
     convertToXs();
     convertNines();
     convertLs();
