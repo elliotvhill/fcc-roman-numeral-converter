@@ -23,8 +23,32 @@ const checkInput = () => {
     numeralsArray = [];
 };
 
+// two in a row
+// V IV -> IX -- no match
+// V V -> X -- match
+// L L -> C -- match
+// XL X -> L -- no match
+// L XL -> XC -- no match
+// CD C -> D -- no match
+// D CD -> CM -- no match
+// D D -> M -- match
+
+
+// four in a row (max) -- all match
+// I I I I -> IV
+// X X X X -> XL
+// C C C C -> CD
+if (
+    // four in a row
+    numeralsArray[i] === numeralsArray[i + 1] &&
+    numeralsArray[i + 1] === numeralsArray[i + 2] && 
+    numeralsArray[i + 2] === numeralsArray[i + 3]
+) {
+    // change to either IV XL or CD
+}
+
+
 const convertToIs = (input) => {
-    // convert to all I's
     for (let i = input; i > 0; i--) {
         numeralsArray.push("I");
     }
