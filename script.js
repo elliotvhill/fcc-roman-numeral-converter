@@ -70,23 +70,36 @@ const divideByOne = (input) => {
 const fourInARow = () => {
     for (let i = 0; i < numeralsArray.length; i++) {
         if (
+            numeralsArray.length <= 4 &&
             numeralsArray[i] === numeralsArray[i + 1] &&
             numeralsArray[i + 1] === numeralsArray[i + 2] &&
-            numeralsArray[i + 2] === numeralsArray[i + 3] &&
-            numeralsArray[i + 3] === "I"
+            numeralsArray[i + 2] === numeralsArray[i + 3]
         ) {
             // change to either IV XL or CD
-            if (numeralsArray[i] === "I") {
+            if (
+                numeralsArray[i + 3] === "I"
+            ) {
                 numeralsArray.splice(i, 4, "IV");
-            } else if (numeralsArray[i] === "X") {
-                numeralsArray.splice(i+1, 4, "XL");
+            } else if (
+                numeralsArray[i] === "X"
+            ) {
+                numeralsArray.splice(i, 4, "XL");
             } else {
-                numeralsArray.splice(i+1, 4, "CD");
+                numeralsArray.splice(i, 4, "CD");
             }
         }
-        return console.log(numeralsArray);
     }
+    return console.log(numeralsArray);
 };
+
+const misMatches = () => {
+    for (let i = 0; i < numeralsArray.length; i++) {
+        if (numeralsArray[i + 3] === "I" && numeralsArray[i + 4] !== null) {
+            numeralsArray.splice(i,5,"V")
+        }
+    }
+    return console.log(numeralsArray);
+}
 
 const convertToIs = (input) => {
     for (let i = input; i > 0; i--) {
@@ -116,7 +129,10 @@ const convertToIs = (input) => {
 const convertNines = () => {
     if (numeralsArray.length > 1) {
         for (let i = 0; i < numeralsArray.length; i++) {
-            if (numeralsArray[i] === "V" && numeralsArray[i + 1] === "IV") {
+            if (
+                numeralsArray[i] === "V" &&
+                numeralsArray[i + 1] === "IV"
+            ) {
                 numeralsArray.splice(i, 2, "IX");
             }
         }
@@ -127,7 +143,10 @@ const convertNines = () => {
 const convertToXs = () => {
     if (numeralsArray.length > 1) {
         for (let i = 0; i < numeralsArray.length; i++) {
-            if (numeralsArray[i] === "V" && numeralsArray[i + 1] === "V") {
+            if (
+                numeralsArray[i] === "V" &&
+                numeralsArray[i + 1] === "V"
+            ) {
                 numeralsArray.splice(i, 2, "X");
             }
         }
@@ -212,6 +231,7 @@ const arabicToRoman = (input) => {
     convertToIs(input);
     // convertToVs();
     fourInARow();
+    misMatches();
     convertToXs();
     convertNines();
     convertLs();
