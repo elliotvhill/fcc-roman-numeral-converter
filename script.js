@@ -73,15 +73,15 @@ const fourInARow = () => {
             numeralsArray[i] === numeralsArray[i + 1] &&
             numeralsArray[i + 1] === numeralsArray[i + 2] &&
             numeralsArray[i + 2] === numeralsArray[i + 3] &&
-            numeralsArray[i + 3] === numeralsArray[i + 4]
+            numeralsArray[i + 3] === "I"
         ) {
             // change to either IV XL or CD
             if (numeralsArray[i] === "I") {
                 numeralsArray.splice(i, 4, "IV");
             } else if (numeralsArray[i] === "X") {
-                numeralsArray.splice(i, 4, "XL");
+                numeralsArray.splice(i+1, 4, "XL");
             } else {
-                numeralsArray.splice(i, 4, "CD");
+                numeralsArray.splice(i+1, 4, "CD");
             }
         }
         return console.log(numeralsArray);
@@ -105,9 +105,9 @@ const convertToIs = (input) => {
 //             ) {
 //                 numeralsArray.splice(i, 4, "IV");
 //             }
-//             if (numeralsArray[i] === "IV" && numeralsArray[i + 1] != null) {
-//                 numeralsArray.splice(i, 2, "V");
-//             }
+// if (numeralsArray[i] === "IV" && numeralsArray[i + 1] != null) {
+//     numeralsArray.splice(i, 2, "V");
+// }
 //         }
 //     }
 //     return console.log("V's:", numeralsArray);
