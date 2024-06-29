@@ -53,12 +53,22 @@ const checkInput = () => {
     numeralsArray = [];
 };
 
+
 const convertToIs = (input) => {
     for (let i = input; i > 0; i--) {
         numeralsArray.push("I");
     }
-    return console.log("I's:", numeralsArray);
 };
+const divideByFive = (input) => {
+    return input / 5;
+};
+const divideByFour = (input) => {
+    return input / 4;
+};
+const divideByOne = (input) => {
+    return input / 1;
+};
+
 
 // const twoOfAKind = () => {
 //     for (let i = 0; i < numeralsArray.length; i++) {
@@ -121,6 +131,7 @@ const divideByTen = (input) => {
 };
 
 /* 
+
 // const convertToVs = () => {
 //     if (numeralsArray.length > 3) {
 //         for (let i = 0; i < numeralsArray.length; i++) {
@@ -131,9 +142,11 @@ const divideByTen = (input) => {
 //             ) {
 //                 numeralsArray.splice(i, 4, "IV");
 //             }
+
 // if (numeralsArray[i] === "IV" && numeralsArray[i + 1] != null) {
 //     numeralsArray.splice(i, 2, "V");
 // }
+
 //         }
 //     }
 //     return console.log("V's:", numeralsArray);
@@ -161,6 +174,7 @@ const convertToXs = () => {
     return console.log("X's:", numeralsArray);
 };
 
+
 // const convertLs = () => {
 //     if (numeralsArray.length > 3) {
 //         for (let i = 0; i < numeralsArray.length; i++) {
@@ -183,6 +197,7 @@ const convertToXs = () => {
 //     }
 //     return console.log("L's:", numeralsArray);
 // };
+
 
 const convertCs = () => {
     if (numeralsArray.length >= 2) {
@@ -232,6 +247,7 @@ const convertMs = () => {
         }
     }
     return console.log("M's:", numeralsArray);
+
 }; */
 
 const arabicToRoman = (input) => {
@@ -246,6 +262,7 @@ const arabicToRoman = (input) => {
     // convertCs();
     // convertDs();
     // convertMs();
+
 };
 
 // EVENT LISTENERS //
