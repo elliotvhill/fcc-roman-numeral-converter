@@ -3,6 +3,36 @@ const input = document.getElementById("number");
 const convertBtn = document.getElementById("convert-btn");
 const output = document.getElementById("output");
 let numeralsArray = [];
+let romans = {
+    1: "I",
+    4: "IV",
+    5: "V",
+    9: "IX",
+    10: "X",
+    40: "XL",
+    50: "L",
+    90: "XC",
+    100: "C",
+    400: "CD",
+    500: "D",
+    900: "CM",
+    1000: "M"
+};
+
+const romanObjectIteration = (input) => {
+    for (numeral in romans) {
+        let i = input
+        if (i / numeral === 1) {
+            numeralsArray.push(romans[i])
+            return console.log(numeralsArray)
+        } else if (i / numeral < 1) {
+            for (let i = input; i > 0; i--) {
+                numeralsArray.push("I");
+            }
+            return console.log(numeralsArray)
+        }
+    }
+}
 
 // FUNCTIONS //
 
@@ -23,38 +53,10 @@ const checkInput = () => {
     numeralsArray = [];
 };
 
-// two in a row
-// V IV -> IX -- no match
-// V V -> X -- match
-// L L -> C -- match
-// XL X -> L -- no match
-// L XL -> XC -- no match
-// CD C -> D -- no match
-// D CD -> CM -- no match
-// D D -> M -- match
-// IV *anything else* -> V etc
-// IX *anything else* -> X etc
 
-// four in a row (max) -- i.e. multiple of FOUR
-// I I I I -> IV
-// X X X X -> XL
-// C C C C -> CD
-
-// input is 40
-// 40 / 10 -> 4
-// 40 / 9 --> remainder -> continue
-// 40 / 5
-// 40 / 4
-// 40 / 1
-
-const divideByTen = (input) => {
-    return input / 10;
-};
-const divideByNine = (input) => {
-    if (input % 9 != 0) {
-        return;
-    } else {
-        return input / 9;
+const convertToIs = (input) => {
+    for (let i = input; i > 0; i--) {
+        numeralsArray.push("I");
     }
 };
 const divideByFive = (input) => {
@@ -67,33 +69,68 @@ const divideByOne = (input) => {
     return input / 1;
 };
 
-const fourInARow = () => {
+
+// const twoOfAKind = () => {
+//     for (let i = 0; i < numeralsArray.length; i++) {
+//         if (numeralsArray[i] === numeralsArray[i + 1]) {
+//             if (numeralsArray[i] === "V") {
+//                 numeralsArray.splice(i, 2, "X");
+//             } else if (numeralsArray[i] === "L") {
+//                 numeralsArray.splice(i, 2, "C");
+//             }
+//             return console.log("V + V:", numeralsArray);
+//         }
+//     }
+// };
+
+/* 
+// always iterate through array
+// for (let i = 0; i < numeralsArray.length; i++) { }
+// either there IS a remainder (%)
+// or there is NOT a remainder (%)
+ */
+
+// only sets of 3: III, XXX, CCC, MMM
+const setOfThree = () => {
+    let isAtThree = 0
     for (let i = 0; i < numeralsArray.length; i++) {
         if (
+            // numeralsArray.length <= 4 &&
             numeralsArray[i] === numeralsArray[i + 1] &&
             numeralsArray[i + 1] === numeralsArray[i + 2] &&
-            numeralsArray[i + 2] === numeralsArray[i + 3] &&
-            numeralsArray[i + 3] === numeralsArray[i + 4]
+            numeralsArray[i + 2] === numeralsArray[i + 3]
         ) {
-            // change to either IV XL or CD
-            if (numeralsArray[i] === "I") {
-                numeralsArray.splice(i, 4, "IV");
-            } else if (numeralsArray[i] === "X") {
-                numeralsArray.splice(i, 4, "XL");
-            } else {
-                numeralsArray.splice(i, 4, "CD");
-            }
+            // change triggered
+            let length = numeralsArray.length - 1
+            numeralsArray.splice(1, length, "V")
+            isAtThree++
+            // let removed = numeralsArray.shift()
+            // return console.log("shifted:", removed, "remaining:", numeralsArray)
         }
-        return console.log(numeralsArray);
+        return console.log("Set of three:", numeralsArray, "is at three?", isAtThree);
     }
 };
 
-const convertToIs = (input) => {
-    for (let i = input; i > 0; i--) {
-        numeralsArray.push("I");
-    }
-    return console.log("I's:", numeralsArray);
+// only sets of 1: IV, V, L
+const setOfOne = () => {
+    // if any of below are duplicated
+    // change triggered
+    // IV
+    // V
+    // L
+    // if IV is followed by _anything_
+    // convert to V
 };
+
+const divideByTen = (input) => {
+    if (input % 10 === 0) {
+        return console.log("divided by 10:", Math.floor(input / 10));
+    } else {
+        return console.log("divided by 9:", Math.floor(input / 9));
+    }
+};
+
+/* 
 
 // const convertToVs = () => {
 //     if (numeralsArray.length > 3) {
@@ -105,9 +142,11 @@ const convertToIs = (input) => {
 //             ) {
 //                 numeralsArray.splice(i, 4, "IV");
 //             }
-//             if (numeralsArray[i] === "IV" && numeralsArray[i + 1] != null) {
-//                 numeralsArray.splice(i, 2, "V");
-//             }
+
+// if (numeralsArray[i] === "IV" && numeralsArray[i + 1] != null) {
+//     numeralsArray.splice(i, 2, "V");
+// }
+
 //         }
 //     }
 //     return console.log("V's:", numeralsArray);
@@ -135,28 +174,30 @@ const convertToXs = () => {
     return console.log("X's:", numeralsArray);
 };
 
-const convertLs = () => {
-    if (numeralsArray.length > 3) {
-        for (let i = 0; i < numeralsArray.length; i++) {
-            if (
-                numeralsArray[i] === "X" &&
-                numeralsArray[i + 1] === "X" &&
-                numeralsArray[i + 2] === "X" &&
-                numeralsArray[i + 3] === "X"
-            ) {
-                numeralsArray.splice(i + 1, 3, "L");
-            }
-            if (
-                numeralsArray[i] === "X" &&
-                numeralsArray[i + 1] === "L" &&
-                numeralsArray[i + 2] === "X"
-            ) {
-                numeralsArray.splice(i, 3, "L");
-            }
-        }
-    }
-    return console.log("L's:", numeralsArray);
-};
+
+// const convertLs = () => {
+//     if (numeralsArray.length > 3) {
+//         for (let i = 0; i < numeralsArray.length; i++) {
+//             if (
+//                 numeralsArray[i] === "X" &&
+//                 numeralsArray[i + 1] === "X" &&
+//                 numeralsArray[i + 2] === "X" &&
+//                 numeralsArray[i + 3] === "X"
+//             ) {
+//                 numeralsArray.splice(i + 1, 3, "L");
+//             }
+//             if (
+//                 numeralsArray[i] === "X" &&
+//                 numeralsArray[i + 1] === "L" &&
+//                 numeralsArray[i + 2] === "X"
+//             ) {
+//                 numeralsArray.splice(i, 3, "L");
+//             }
+//         }
+//     }
+//     return console.log("L's:", numeralsArray);
+// };
+
 
 const convertCs = () => {
     if (numeralsArray.length >= 2) {
@@ -206,18 +247,22 @@ const convertMs = () => {
         }
     }
     return console.log("M's:", numeralsArray);
-};
+
+}; */
 
 const arabicToRoman = (input) => {
-    convertToIs(input);
+    // convertToIs(input);
+    romanObjectIteration(input);
+    // setOfThree();
+    // divideByTen(input);
     // convertToVs();
-    fourInARow();
-    convertToXs();
-    convertNines();
-    convertLs();
-    convertCs();
-    convertDs();
-    convertMs();
+    // convertToXs();
+    // convertNines();
+    // // convertLs();
+    // convertCs();
+    // convertDs();
+    // convertMs();
+
 };
 
 // EVENT LISTENERS //
