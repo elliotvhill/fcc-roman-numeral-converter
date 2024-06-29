@@ -3,7 +3,36 @@ const input = document.getElementById("number");
 const convertBtn = document.getElementById("convert-btn");
 const output = document.getElementById("output");
 let numeralsArray = [];
-let romans = ["I", "V", "X", "L", "C", "D", "M"];
+let romans = {
+    1: "I",
+    4: "IV",
+    5: "V",
+    9: "IX",
+    10: "X",
+    40: "XL",
+    50: "L",
+    90: "XC",
+    100: "C",
+    400: "CD",
+    500: "D",
+    900: "CM",
+    1000: "M"
+};
+
+const romanObjectIteration = (input) => {
+    for (numeral in romans) {
+        let i = input
+        if (i / numeral === 1) {
+            numeralsArray.push(romans[i])
+            return console.log(numeralsArray)
+        } else if (i / numeral < 1) {
+            for (let i = input; i > 0; i--) {
+                numeralsArray.push("I");
+            }
+            return console.log(numeralsArray)
+        }
+    }
+}
 
 // FUNCTIONS //
 
@@ -53,60 +82,43 @@ const convertToIs = (input) => {
 
 // only sets of 3: III, XXX, CCC, MMM
 const setOfThree = () => {
-    // if array[i] === array[i + 1] === array[i + 2] && if array[i + 3]?
+    let isAtThree = 0
     for (let i = 0; i < numeralsArray.length; i++) {
         if (
+            // numeralsArray.length <= 4 &&
             numeralsArray[i] === numeralsArray[i + 1] &&
             numeralsArray[i + 1] === numeralsArray[i + 2] &&
-            numeralsArray[i + 3] !== null
+            numeralsArray[i + 2] === numeralsArray[i + 3]
         ) {
             // change triggered
-            if (numeralsArray[i + 3] === "I") {
-                numeralsArray.splice(0, 4, "IV");
-                if (numeralsArray[4] !== null) {
-                    numeralsArray.splice(i, 2, "V");
-                }
-            }
-            return console.log("Set of three:", numeralsArray);
+            let length = numeralsArray.length - 1
+            numeralsArray.splice(1, length, "V")
+            isAtThree++
+            // let removed = numeralsArray.shift()
+            // return console.log("shifted:", removed, "remaining:", numeralsArray)
         }
+        return console.log("Set of three:", numeralsArray, "is at three?", isAtThree);
     }
 };
 
 // only sets of 1: IV, V, L
 const setOfOne = () => {
     // if any of below are duplicated
-        // change triggered
-            // IV
-            // V
-            // L
+    // change triggered
+    // IV
+    // V
+    // L
     // if IV is followed by _anything_
     // convert to V
 };
 
 const divideByTen = (input) => {
     if (input % 10 === 0) {
-        return console.log("divided by 10:", input / 10);
+        return console.log("divided by 10:", Math.floor(input / 10));
     } else {
-        return console.log("divided by 9:", input / 9);
+        return console.log("divided by 9:", Math.floor(input / 9));
     }
 };
-
-// const divideByNine = (input) => {
-//     if (input % 9 != 0) {
-//         return;
-//     } else {
-//         return input / 9;
-//     }
-// };
-// const divideByFive = (input) => {
-//     return input / 5;
-// };
-// const divideByFour = (input) => {
-//     return input / 4;
-// };
-// const divideByOne = (input) => {
-//     return input / 1;
-// };
 
 /* 
 // const convertToVs = () => {
@@ -223,8 +235,9 @@ const convertMs = () => {
 }; */
 
 const arabicToRoman = (input) => {
-    convertToIs(input);
-    setOfThree();
+    // convertToIs(input);
+    romanObjectIteration(input);
+    // setOfThree();
     // divideByTen(input);
     // convertToVs();
     // convertToXs();
